@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct Symbol{
+    char name[30];
+    char type[10];
+    char kind[10];
+    int scope;
+    char value[30];
+    struct Symbol *next;
+} Symbol;
+
+//create an empty table
+Symbol *createTable()
+{
+
+    return NULL; // empty linked list
+}
+
+//add a new backup
+Symbol* addSymbol (Symbol *table, char *name, char *type, char *kind, int scope ,char *value)
+{
+    Symbol *newSym= (Symbol*)malloc(sizeof(Symbol));
+    strcpy(newSym->name, name);
+    strcpy(newSym->type, type);
+     strcpy(newSym->kind, kind);
+       newSym->scope=scope;
+     strcpy(newSym->value, value);
+     newSym ->next=table;
+     return newSym;
+
+}
+
+//display the table
+void displayTable (Symbol *table)
+{
+    printf("Name\tType\tKind\tScope\tValue\n");
+    printf("-------------------------------\n");
+    for(Symbol *p=table; p!=NULL; p= p->next)
+    {
+        printf("%s\t%s\t%s\t%d\t%s\n",p->name,p->type,p->kind,p->scope,p->value);
+    }
+}
+
+//test it
+int main()
+{
+    Symbol *table= createTable();
+    table= addSymbol(table, "x","int","var",0,"10");
+    table= addSymbol (table,"sum","float","func",0,"");
+    table= addSymbol(table, "y","int","var",1,"5");
+
+    displayTable(table);
+    return 0 ;
+}
+
+
+
